@@ -1,29 +1,35 @@
 # Rust-koan
 
+> 记录[《陈天 · Rust 编程第一课》](https://time.geekbang.org/column/intro/100085301?code=giOSIlBIc9I7DCzTSPw4H4tKiHXRnI4L6GCNKmz-XnI%3D&source=app_share)的学习之路
+
 ## Setup
-### install
 
-```shell
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-### Run in docker
-
-```shell
-# speed up if needed
-# export RUSTUP_DIST_SERVER=https://mirrors.sjtug.sjtu.edu.cn/rust-static
-# export RUSTUP_UPDATE_ROOT=https://mirrors.sjtug.sjtu.edu.cn/rust-static/rustup
-
-docker run --rm --user "$(id -u)":"$(id -g)" -v "$PWD":/usr/src/myapp -w /usr/src/myapp rust cargo run
-
-# or
-SRC_DIR=scrape_url sh run.sh https://www.rust-lang.org/ rust.md
-```
-
-### tools
+### vscoode tools
 
 - rust-analyzer
 - rust syntax
 - better toml
 - rust test lens
 - Tabnine
+
+### Run in local
+
+```shell
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# inside src directory
+# 国内加速如果需要的话
+# export RUSTUP_DIST_SERVER=https://mirrors.sjtug.sjtu.edu.cn/rust-static
+# export RUSTUP_UPDATE_ROOT=https://mirrors.sjtug.sjtu.edu.cn/rust-static/rustup
+
+cargo run
+```
+
+### Run in docker
+
+```shell
+# 使用docker构建
+docker run -it --rm --user "$(id -u)":"$(id -g)" -v "$PWD":/usr/src/myapp -w /usr/src/myapp rust cargo run
+
+# 使用docker缓存依赖版
+SRC_DIR=scrape_url sh run.sh https://www.rust-lang.org/ rust.md
+```
