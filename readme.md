@@ -1,6 +1,7 @@
 # Rust-koan
 
-> 记录[《陈天 · Rust 编程第一课》](https://time.geekbang.org/column/intro/100085301?code=giOSIlBIc9I7DCzTSPw4H4tKiHXRnI4L6GCNKmz-XnI%3D&source=app_share)的学习之路
+> 记录[《陈天 · Rust 编程第一课》](https://time.geekbang.org/column/intro/100085301?code=giOSIlBIc9I7DCzTSPw4H4tKiHXRnI4L6GCNKmz-XnI%3D&source=app_share)的学习之路.
+> [课程仓库](https://github.com/tyrchen/geektime-rust) 
 
 ## Setup
 
@@ -32,4 +33,16 @@ docker run -it --rm --user "$(id -u)":"$(id -g)" -v "$PWD":/usr/src/myapp -w /us
 
 # 使用docker缓存依赖版
 SRC_DIR=scrape_url sh run.sh https://www.rust-lang.org/ rust.md
+```
+
+#### 添加依赖
+
+使用`cargo-edit`，类似`yarn`
+
+```shell
+cargo install cargo-edit
+cargo add anyhow colored jsonxf mime
+cargo add clap --allow-prerelease
+cargo add reqwest --features "json rustls-tls"
+cargo add tokio --features full
 ```
