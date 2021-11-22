@@ -1,5 +1,7 @@
-
-use clap::{Parser};
+use anyhow::{anyhow, Result};
+use clap::Parser;
+use reqwest::Url;
+use std::str::FromStr;
 
 // 定义 HTTPie 的 CLI 的主入口，它包含若干个子命令
 // 下面 /// 的注释是文档，clap 会将其作为 CLI 的帮助
@@ -26,6 +28,7 @@ enum SubCommand {
 #[derive(Parser, Debug)]
 struct Get {
     /// HTTP 请求的 URL
+    #[clap(parse(try_from_str = parse_url))]
     url: String,
 }
 
@@ -36,12 +39,37 @@ struct Get {
 #[derive(Parser, Debug)]
 struct Post {
     /// HTTP 请求的 URL
+    #[clap(parse(try_from_str = parse_url))]
     url: String,
     /// HTTP 请求的 body
-    body: Vec<String>,
+    #[clap(parse(try_from_str = parse_kv_pair))]
+    body: Vec<KvPair>,
 }
+#[derive(Debug)]
+struct KvPair {
+    k: String,
+    v: String,
+}
+fn parse_url(s: &str) -> Result<String> {
+    let _utl: Url = s.parse()?;
+    Ok(s.into())
+}
+impl FromStr for KvPair {
+    type Err = anyhow::Error;
 
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let mut split = s.split("=");
+        let err = || anyhow!(format!("Failed to parse {}", s));
+        Ok(Self {
+            k: (split.next().ok_or_else(err)?).to_string(),
+            v: (split.next().ok_or_else(err)?).to_string(),
+        })
+    }
+}
+fn parse_kv_pair(s: &str) -> Result<KvPair> {
+    Ok(s.parse()?)
+}
 fn main() {
     let opts: Opts = Opts::parse();
     println!("{:?}", opts);
-} 
+}
