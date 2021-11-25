@@ -75,7 +75,7 @@ impl Spec {
         }
     }
 
-    pub fn new_filter(filter: resize::SampleFilter) -> Self {
+    pub fn new_filter(filter: filter::Filter) -> Self {
         Self {
             data: Some(spec::Data::Filter(Filter {
                 filter: filter as i32,
