@@ -1,0 +1,21 @@
+[package]
+name = "type_system"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "generic_struct"
+path = "src/generic_struct.rs"
+
+[[bin]]
+name = "generic_fn"
+path = "src/generic_fn.rs"
+
+[[bin]]
+name = "writer"
+path = "src/writer.rs"
+
+[dependencies]
+

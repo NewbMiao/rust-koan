@@ -1,0 +1,52 @@
+[package]
+name = "traits"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "buf-builder"
+path = "src/buf-builder.rs"
+
+[[bin]]
+name = "parse"
+path = "src/parse.rs"
+
+[[bin]]
+name = "parse-generic"
+path = "src/parse-generic.rs"
+
+[[bin]]
+name = "parse-with-err"
+path = "src/parse-with-err.rs"
+
+[[bin]]
+name = "add-generic"
+path = "src/add-generic.rs"
+
+[[bin]]
+name = "animal"
+path = "src/animal.rs"
+
+[[bin]]
+name = "trait-object"
+path = "src/trait-object.rs"
+
+[[bin]]
+name = "trait-object-vtable"
+path = "src/trait-object-vtable.rs"
+
+[[bin]]
+name = "sentence"
+path = "src/sentence.rs"
+
+[[bin]]
+name = "common"
+path = "src/common.rs"
+
+[[bin]]
+name = "list"
+path = "src/list.rs"
+
+[dependencies]
+regex = "1.5"
