@@ -2,3 +2,4 @@
 target/
 rust.md
 Cargo.lock
+queryer/.env
