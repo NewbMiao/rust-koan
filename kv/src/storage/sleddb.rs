@@ -95,9 +95,3 @@ fn ivec_to_key(ivec: &[u8]) -> &str {
     iter.next();
     iter.next().unwrap()
 }
-
-impl From<sled::Error> for KvError {
-    fn from(e: sled::Error) -> Self {
-        KvError::Internal(e.to_string())
-    }
-}

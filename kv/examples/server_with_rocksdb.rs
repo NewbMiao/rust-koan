@@ -1,7 +1,7 @@
 use anyhow::Result;
 use async_prost::AsyncProstStream;
 use futures::prelude::*;
-use kv::{CommandRequest, CommandResponse, MemTable, Service, ServiceInner};
+use kv::{CommandRequest, CommandResponse, RocksDb, Service, ServiceInner};
 use tokio::net::TcpListener;
 use tracing::info;
 
@@ -11,7 +11,12 @@ async fn main() -> Result<()> {
     let addr = "127.0.0.1:9527";
     let listener = TcpListener::bind(addr).await?;
     info!("Start listening on {}", addr);
-    let service: Service = ServiceInner::new(MemTable::default()).into();
+    let service: Service<RocksDb> = ServiceInner::new(RocksDb::new("/tmp/kvserver2"))
+        .fn_before_send(|res| match res.message.as_ref() {
+            "" => res.message = "altered. Original message is empty.".into(),
+            s => res.message = format!("altered: {}", s),
+        })
+        .into();
 
     loop {
         let (stream, addr) = listener.accept().await?;

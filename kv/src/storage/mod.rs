@@ -1,7 +1,9 @@
 mod memory;
+mod rockdb;
 mod sleddb;
 use crate::{KvError, Kvpair, Value};
 pub use memory::MemTable;
+pub use rockdb::RocksDb;
 pub use sleddb::SledDb;
 /// 对存储的抽象，我们不关心数据存在哪儿，但需要定义外界如何和存储打交道
 pub trait Storage {
@@ -21,7 +23,11 @@ pub trait Storage {
     /// 遍历 HashTable，返回所有 kv pair（这个接口不好）
     fn get_all(&self, table: &str) -> Result<Vec<Kvpair>, KvError>;
     /// 遍历 HashTable，返回 kv pair 的 Iterator
-    fn get_iter(&self, table: &str) -> Result<Box<dyn Iterator<Item = Kvpair>>, KvError>;
+    // fn get_iter(&self, table: &str) -> Result<Box<dyn Iterator<Item = Kvpair>>, KvError>;
+    fn get_iter<'a>(
+        &'a self,
+        table: &str,
+    ) -> Result<Box<dyn Iterator<Item = Kvpair> + 'a>, KvError>;
 }
 
 pub struct StorageIter<T> {
@@ -142,6 +148,27 @@ mod tests {
     fn sleddb_iter_should_work() {
         let dir = tempdir().unwrap();
         let store = SledDb::new(dir);
+        test_get_iter(store);
+    }
+
+    #[test]
+    fn rocksdb_basic_interface_should_work() {
+        let dir = tempdir().unwrap();
+        let store = RocksDb::new(dir);
+        test_basi_interface(store);
+    }
+
+    #[test]
+    fn rocksdb_get_all_should_work() {
+        let dir = tempdir().unwrap();
+        let store = RocksDb::new(dir);
+        test_get_all(store);
+    }
+
+    #[test]
+    fn rocksdb_iter_should_work() {
+        let dir = tempdir().unwrap();
+        let store = RocksDb::new(dir);
         test_get_iter(store);
     }
 }
