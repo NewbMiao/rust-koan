@@ -1,0 +1,16 @@
+[package]
+name = "playground"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.57"
+bytes = "1.1.0"
+futures = "0.3.21"
+lazy_static = "1.4.0"
+libp2p = { version = "0.45.1", features = ["tcp-tokio"] }
+rocket = { version = "0.5.0-rc.1", features = ["json"] }
+tokio = "1.19.2"
+tokio-util = "0.7.3"
