@@ -14,6 +14,8 @@ pub enum KvError {
     ConvertError(Value, &'static str),
     #[error("Cannot process command {0} with table: {1}, key: {2}. Error: {}")]
     StorageError(&'static str, String, String, String),
+    #[error("Certificate parse error: error to load {0} {0}")]
+    CertifcateParseError(&'static str, &'static str),
 
     #[error("Failed to encode protobuf message")]
     EncodeError(#[from] prost::EncodeError),
@@ -27,6 +29,8 @@ pub enum KvError {
     RocksDBError(#[from] rocksdb::Error),
     #[error("I/O error")]
     IoError(#[from] std::io::Error),
+    #[error("TLS error")]
+    TlsError(#[from] tokio_rustls::rustls::TLSError),
     #[error("Internal error: {0}")]
     Internal(String),
 }
