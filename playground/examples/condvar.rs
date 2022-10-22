@@ -11,6 +11,8 @@ fn main() {
         let mut started = lock.lock().unwrap();
         *started = true;
         eprintln!("I'm a happy worker!");
+        drop(started); // free lock
+
         // 通知主线程
         cvar.notify_all();
         loop {
@@ -26,4 +28,5 @@ fn main() {
         started = cvar.wait(started).unwrap();
     }
     eprintln!("Worker started!");
+    thread::sleep(Duration::from_secs(10));
 }
