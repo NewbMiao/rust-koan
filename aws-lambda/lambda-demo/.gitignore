@@ -1,0 +1,7 @@
+/target
+/volume
+/node_modules
+*.zip
+infrastructure/*.tfstate*
+infrastructure/.terraform
+infrastructure/.terraform.lock.hcl
