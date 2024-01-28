@@ -5,3 +5,5 @@
 infrastructure/*.tfstate*
 infrastructure/.terraform
 infrastructure/.terraform.lock.hcl
+infrastructure/lambda
+public/main.css
