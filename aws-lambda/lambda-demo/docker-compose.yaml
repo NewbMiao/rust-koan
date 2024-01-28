@@ -10,6 +10,9 @@ services:
     environment:
       # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
       - DEBUG=${DEBUG:-0}
+      # https://github.com/localstack/localstack/issues/6877#issuecomment-1254622377
+      - DISABLE_CORS_CHECKS=1
+      - DISABLE_CUSTOM_CORS_APIGATEWAY=1
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"

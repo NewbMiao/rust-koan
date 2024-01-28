@@ -1,9 +1,21 @@
 #! /bin/bash
+# build
+cargo lambda build --release --arm64
 
-cargo lambda build --release --arm64 --output-format zip
-cp ./target/lambda/lambda-demo/bootstrap.zip ./infrastructure/
+# pack files into lambda folder
+mkdir -p ./infrastructure/lambda
+cp ./target/lambda/lambda-demo/bootstrap ./infrastructure/lambda
+yarn build
+cp -r ./public ./infrastructure/lambda/
+cp -r ./templates ./infrastructure/lambda/
 
-# cd infrastructure
+# zip files in lambda folder as bootstrap.zip
+rm ./infrastructure/bootstrap.zip
+cd ./infrastructure/lambda || exit
+zip -r ../bootstrap.zip ./*
+
+# deploy
+# cd ../
 # terraform init
 # terraform plan
 # terraform apply -auto-approve

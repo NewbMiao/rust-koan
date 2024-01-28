@@ -1,34 +1,54 @@
-use lambda_http::{run, service_fn, Body, Error, Request, RequestExt, Response};
+use askama::Template;
+use lambda_http::{run, service_fn, Body, Error, Request, Response};
 
-/// This is the main body for the function.
-/// Write your code inside it.
-/// There are some code example in the following URLs:
-/// - https://github.com/awslabs/aws-lambda-rust-runtime/tree/main/examples
 async fn handler(event: Request) -> Result<Response<Body>, Error> {
-    // Extract some useful information from the request
-    let who = event
-        .query_string_parameters_ref()
-        .and_then(|params| params.first("name"))
-        .unwrap_or("world");
-    let message = format!("Hello {who}, this is an AWS Lambda HTTP request");
+    let resp;
+    let mut content_type = "text/html";
 
-    // Return something that implements IntoResponse.
-    // It will be serialized to the right response event automatically by the runtime
-    let resp = Response::builder()
+    match event.uri().path() {
+        "/public/main.css" => {
+            content_type = "text/css";
+            resp = include_str!("../public/main.css").into();
+        }
+        "/support" => {
+            let support = SupportTemplate {};
+            resp = support.render().unwrap();
+        }
+        "/about" => {
+            let about = AboutTemplate {};
+            resp = about.render().unwrap();
+        }
+        _ => {
+            let home = HomeTemplate {};
+            resp = home.render().unwrap();
+        }
+    }
+
+    let response = Response::builder()
         .status(200)
-        .header("content-type", "text/html")
-        .body(message.into())
+        .header("content-type", content_type)
+        .body(resp.into())
         .map_err(Box::new)?;
-    Ok(resp)
+    Ok(response)
 }
+
+#[derive(Template)]
+#[template(path = "home.html")]
+struct HomeTemplate {}
+
+#[derive(Template)]
+#[template(path = "about.html")]
+struct AboutTemplate {}
+
+#[derive(Template)]
+#[template(path = "support.html")]
+struct SupportTemplate {}
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     tracing_subscriber::fmt()
         .with_max_level(tracing::Level::INFO)
-        // disable printing the name of the module in every log line.
         .with_target(false)
-        // disabling time is handy because CloudWatch will add the ingestion time.
         .without_time()
         .init();
 

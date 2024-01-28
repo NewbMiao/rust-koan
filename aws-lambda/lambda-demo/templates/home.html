@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
+    Hello, this is a Rust AWS Lambda HTTP request with askama templates
+</p>
+<div class="mt-10 flex items-center justify-center gap-x-6">
+    <a href="/about" class="text-sm font-semibold leading-6 text-gray-900">Read Me<span aria-hidden="true">→</span></a>
+    <a href="/support" class="text-sm font-semibold leading-6 text-gray-900">Ask Support<span
+            aria-hidden="true">→</span></a>
+</div>
+{% endblock %}
