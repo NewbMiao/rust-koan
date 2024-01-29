@@ -1,0 +1,8 @@
+[workspace]
+
+exclude = ["playground"]
+
+members = ["tokio-play", "aws-lambda/lambda-demo", "hyper-play"]
+resolver = "2"
+
+[workspace.dependencies]
