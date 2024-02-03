@@ -1,0 +1,19 @@
+[package]
+name = "tower-play"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bytes = "1.5.0"
+http-body-util = "0.1.0"
+hyper = { version = "1.1.0", features = ["full"] }
+hyper-util = { version = "0.1.2", features = ["full"] }
+tokio = { version = "1.35.1", features = [
+    "macros",
+    "net",
+    "rt-multi-thread",
+    "io-std",
+] }
+tower = { version = "0.4.13", features = ["full"] }
