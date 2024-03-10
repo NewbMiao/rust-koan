@@ -4,7 +4,10 @@ cargo lambda build --release --arm64
 
 # pack files into lambda folder
 mkdir -p ./infrastructure/lambda
-cp ./target/lambda/lambda-demo/bootstrap ./infrastructure/lambda
+# if package is in a workspace, use workspace target： 
+cp ../../target/lambda/lambda-demo/bootstrap ./infrastructure/lambda
+# otherwise:
+# cp ./target/lambda/lambda-demo/bootstrap ./infrastructure/lambda
 yarn build
 cp -r ./public ./infrastructure/lambda/
 cp -r ./templates ./infrastructure/lambda/
