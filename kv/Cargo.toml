@@ -46,4 +46,4 @@ tempfile = "3.3.0"
 tokio-util = { version = "0.7.3", features = ["codec"] }
 
 [build-dependencies]
-prost-build = "0.10.4"
+prost-build = "0.12.4"
