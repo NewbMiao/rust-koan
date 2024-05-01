@@ -13,7 +13,7 @@ name = "dialect"
 name = "covid"
 
 [dependencies]
-anyhow = "1" # 错误处理，其实对于库我们应该用 thiserror，但这里简单起见就不节外生枝了
+anyhow = "1.0.82" # 错误处理，其实对于库我们应该用 thiserror，但这里简单起见就不节外生枝了
 async-trait = "0.1" # 允许 trait 里有 async fn
 sqlparser = "0.10" # SQL 解析器
 polars = { version = "0.15", features = ["json", "lazy"] } # DataFrame 库

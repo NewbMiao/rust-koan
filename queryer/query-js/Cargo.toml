@@ -9,7 +9,7 @@ exclude = ["index.node"]
 crate-type = ["cdylib"]
 
 [dependencies]
-anyhow = "1"
+anyhow = "1.0.82"
 queryer = { path = "../queryer" }
 tokio = { version = "1", features = ["full"] }
 
