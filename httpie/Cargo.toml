@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.48"
-clap = "3.1.6"
+clap = "3.2.25"
 colored = "2.0.0"
 jsonxf = "1.1.1"
 mime = "0.3.16"
