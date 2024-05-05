@@ -11,7 +11,7 @@ clap = "3.1.6"
 colored = "2.0.0"
 jsonxf = "1.1.1"
 mime = "0.3.16"
-reqwest = { version = "0.11.6", default-features = false, features = ["json", "rustls-tls"] } # HTTP 客户端
+reqwest = { version = "0.12.0", default-features = false, features = ["json", "rustls-tls"] } # HTTP 客户端
 tokio = { version = "1.15.0", features = ["full"] } # 异步处理库
 syntect = "4"
 
