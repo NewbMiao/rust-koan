@@ -22,5 +22,5 @@ tokio = { version = "1", features = ["fs"]} # 我们的老朋友异步库，我�
 tracing = "0.1" # 日志处理
 
 [dev-dependencies]
-tracing-subscriber = "0.2" # 日志处理
+tracing-subscriber = "0.3" # 日志处理
 tokio = { version = "1", features = ["full"]} # 在 example 下我们需要更多的 tokio feature
